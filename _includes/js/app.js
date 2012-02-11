@@ -67,7 +67,7 @@ soundManager.onready(function() {
 
   setUpControls();
 
-  //$("#tweet-holder").liveTwitter(searchTerm);
+  $("#tweet-holder").liveTwitter(searchTerm);
   var musicTicker = musicTick();
 });
 
@@ -93,6 +93,15 @@ function musicTick() {
 
 function playChords() {
   var arr = new Array();
+  if(numTicks%metronomeTick == 0 && metronomePos%2 == 0) {
+    var moveTweet = tweetStream.pop();
+    if(moveTweet != undefined) {
+      $('#tweet-sidebar').prepend((moveTweet.node).hide().fadeIn());
+      $('#debug').text = moveTweet['text'].split(' ').length%16 + 1;
+      var noteLength = moveTweet['text'].split(' ').length%16 + 1
+      arr.push('note' + noteLength);    
+    }
+  }
   return arr;
 };
 
@@ -171,9 +180,3 @@ function changeRateOld(rate) {
   musicTick();
   return "Changed rate to " + tickLength/1000 + " seconds";
 }
-
-/*
-$('#tweet-receiver').live('newtweet', function(e, data) {
-  console.log(data);
-});
-*/

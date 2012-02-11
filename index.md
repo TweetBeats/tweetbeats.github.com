@@ -7,7 +7,7 @@ title: TweetBeats
   
 <div class="row">
  <h1>TweetBeats</h1>
-  <div id="buffer-container" class="progress progress-striped active noisy">
+  <div id="buffer-container" class="span6 progress progress-striped active noisy">
     <div id="buffer-progress" class="bar">&nbsp;</div>
   </div>  
 </div>
@@ -17,8 +17,10 @@ title: TweetBeats
 <div class="span6">
   <h1>Chords <small>Choose how the chords are selected.</small></h1>
   <div id="chord-controls">
+
     <h3>Word Count <small>Words = noise</small></h3>
     <p>The word count is converted into a chord.</p>
+    <p id="debug">&nbsp;</p>
   </div>
 </div>
 <div class="span6">
