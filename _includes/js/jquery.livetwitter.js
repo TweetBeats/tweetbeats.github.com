@@ -325,7 +325,7 @@
                       $(twitter.container).prepend(newTweetNode);
                       twitter.tweetList.push(newTweetNode);
                       tweet.node = newTweetNode;
-                      tweetStream.push(tweet);
+                      window.tweetStream.push(tweet);
 
 
                       // Make a note of the timestamp on the first span

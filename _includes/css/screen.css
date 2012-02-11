@@ -6,6 +6,10 @@ body {
   padding: 10px;
 }
 
+#sm2-container {
+  visibility: hidden;
+}
+
 #tweet-sidebar {
   overflow: hidden;
   position: fixed;

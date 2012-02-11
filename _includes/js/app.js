@@ -1,11 +1,15 @@
 var searchTerm = 'Jeremy Lin';
+var muted = false;
 
 // TODO: Move this into the liveTwitter plugin object.
-var tweetStream = [];
+// I KNOW I KNOW I ATTACHED IT TO WINDOW BUT THIS NEEDS TO FINISH.
+window.tweetStream = new Array();
+var moveTweet;
 
-var musicMeasure = [];
+var musicMeasure = new Array();
+var refreshId;
+var tickLength = 3000; // num seconds * 1000
 
-//$("#tweet-holder").liveTwitter(searchTerm);
 /*
 setInterval(function() {
   var moveTweet = tweetStream.pop();
@@ -40,36 +44,37 @@ soundManager.onready(function() {
     }).load();
   }
 
+  $("#tweet-holder").liveTwitter(searchTerm);
   var musicTicker = musicTick();
 });
 
 function musicTick() {
-  return window.setInterval(function() {
-    soundManager.play('note' + Math.floor(Math.random()*15));
-    soundManager.play('note' + Math.floor(Math.random()*15));
-    soundManager.play('note' + Math.floor(Math.random()*15));
-  }, 1000);
+  if(tweetStream.length > 0) {
+    var moveTweet = tweetStream.pop();
+    conso
+    $('#tweet-sidebar').prepend((moveTweet.node).hide().fadeIn()); 
+
+    if(!muted) {
+      soundManager.play('note' + Math.floor(Math.random()*15)); 
+    }
+  }
+
+  // Save timeout to use again
+  refreshId = setTimeout(function(){
+    musicTick();
+  }, tickLength);
+}
+
+function changeRate(rate) {
+  rate = rate || 1000;
+  clearTimeout(refreshId);
+  tickLength = rate;
+  musicTick();
+  return "Changed rate to " + tickLength/1000 + " seconds";
 }
 
 /*
 $('#tweet-receiver').live('newtweet', function(e, data) {
   console.log(data);
 });
-*/
-/* NOTES
-72+24
-69+24
-67+24
-65+24
-62+24
-60+24
-69+12
-67+12
-65+12
-62+12
-69
-67
-65
-62
-60
 */
