@@ -82,6 +82,8 @@ function musicTick() {
     notesToPlay = notesToPlay.concat(playMetronomeBeat());
 
     if (notesToPlay.length > 0) {
+      console.log("Playing " + notesToPlay.length + " notes.");
+      soundManager.stopAll();
       $.each(notesToPlay, function(){
         soundManager.play(this);        
       });
