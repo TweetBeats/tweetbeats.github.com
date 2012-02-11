@@ -52,7 +52,7 @@
         settings = $.extend({
           mode:      'search', // Mode, valid options are: 'search', 'user_timeline', 'list', 'home_timeline'
           rate:      15000,    // Refresh rate in ms
-          limit:     1000,       // Limit number of results
+          limit:     10,       // Limit number of results
           imageSize: 24,       // Size of image in pixels
           refresh:   true,
           timeLinks: true,
@@ -374,8 +374,8 @@
               this.refresh(true);
             }
             this.addInterval = setInterval(function() {
-              $('#tweet-sidebar').prepend(($('#tweet-holder').find('div.tweet:last')).hide().slideDown());
-
+              var offset = -1;
+              $('#tweet-sidebar').prepend(($('#tweet-holder > div.tweet').slice(offset)).hide().fadeIn());
             }, 3000);
           },
 
@@ -394,7 +394,9 @@
           },
 
           updateCount: function() {
-            $('#tweet-count').html($(this.container).find('div.tweet').length);
+            var count = $(this.container).find('div.tweet').length;
+            $('#tweet-count').html(count);
+            return count;
           }
         };
 
