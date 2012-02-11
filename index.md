@@ -23,7 +23,9 @@ title: TweetBeats
 
     <h3>Hash Tag <small>Make 'popular' music</small> </h3>
     <p>Listen to Twitter's pulse on:</p>
+    <div class="span3" style="margin-left: 0">
     <form><input id="changeInput" type="text" placeholder="Input a hashtag"/> <a id="changeSearch" href="#" class="btn btn-success">Go</a> </form>
+    </div>
     <p id="debug">&nbsp;</p>
   </div>
 </div>
