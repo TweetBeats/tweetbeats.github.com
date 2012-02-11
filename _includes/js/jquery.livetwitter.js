@@ -392,11 +392,11 @@
           updateCount: function() {
             var count = $(this.container).find('div.tweet').length;
             $('#tweet-count').html(count);
-              if(count > 30) {
+              if(count > 100) {
                 console.log("Filled buffer.");
                 $('#buffer-progress').css('width', "100%");
               } else {
-                $('#buffer-progress').css('width', ((count/30)*100) + '%');
+                $('#buffer-progress').css('width', (count + '%'));
               }
             return count;
           }

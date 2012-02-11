@@ -8,7 +8,16 @@ var moveTweet;
 
 var musicMeasure = new Array();
 var refreshId;
-var tickLength = 3000; // num seconds * 1000
+var TICK_LENGTHS = {
+  shortest: 500,
+  shorter: 1000,
+  normal: 2000,
+  slow: 2500,
+  slowest: 5000
+}
+var RATE_CHANGE_INTERVAL = 5000;
+
+var tickLength = TICK_LENGTHS.normal;
 
 /*
 setInterval(function() {
@@ -46,16 +55,36 @@ soundManager.onready(function() {
 
   $("#tweet-holder").liveTwitter(searchTerm);
   var musicTicker = musicTick();
+
+  setInterval(function() {
+    var tslength = tweetStream.length;
+    if (tslength > 70) {
+      changeRate(TICK_LENGTHS.shortest);
+      console.log("Shortening tick to 500");
+    } else if (tslength > 40 && tslength <= 70) {
+      changeRate(TICK_LENGTHS.shorter);
+      console.log("Shortening tick to 1000");
+    } else if (tslength > 10 && tslength <= 40) {
+      changeRate(TICK_LENGTHS.slowest);
+    } 
+  }, RATE_CHANGE_INTERVAL);
 });
 
 function musicTick() {
+  // Stop everything!
+  soundManager.stopAll();
   if(tweetStream.length > 0) {
     var moveTweet = tweetStream.pop();
-    conso
     $('#tweet-sidebar').prepend((moveTweet.node).hide().fadeIn()); 
 
+    console.log(moveTweet);
+
     if(!muted) {
-      soundManager.play('note' + Math.floor(Math.random()*15)); 
+      var noteTextLength = moveTweet['text'].split(' ').length%16 + 1; 
+      var noteTime = moveTweet['created_at'].split(':')[1]%16 + 1;
+      soundManager.play('note' + noteTextLength);
+      soundManager.play('note' + noteTime);
+      console.log('text length: ' + noteTextLength + ', time ' + noteTime);
     }
   }
 
