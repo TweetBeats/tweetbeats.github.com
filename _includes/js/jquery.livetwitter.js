@@ -28,6 +28,7 @@
   
   $.fn.liveTwitter = function (query, options, callback) {
     var domNode = this;
+    console.log("Using query " + query);
     $(this).each(function () {
       var settings = {};
 

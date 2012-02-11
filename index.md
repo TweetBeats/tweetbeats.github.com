@@ -20,6 +20,10 @@ title: TweetBeats
 
     <h3>Word Count <small>Words = noise</small></h3>
     <p>The word count is converted into a chord.</p>
+
+    <h3>Hash Tag <small>Make 'popular' music</small> </h3>
+    <p>Listen to Twitter's pulse on:</p>
+    <form><input id="changeInput" type="text" placeholder="Input a hashtag"/> <a id="changeSearch" href="#" class="btn btn-success">Go</a> </form>
     <p id="debug">&nbsp;</p>
   </div>
 </div>

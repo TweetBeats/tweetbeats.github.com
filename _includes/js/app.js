@@ -140,6 +140,14 @@ function setUpControls() {
   $('#metro-controls a').click(function(){
     $(this).toggleClass('btn-info');
   });
+
+  $('#changeSearch').click(function(){
+    searchTerm = $('#changeInput').val();
+    console.log("Changing twitter search to " + searchTerm);
+    $('#tweet-holder').liveTwitter(searchTerm).each(function(){
+      this.twitter.clear();
+    });
+  });
 }
 
 function musicTickOld() {
