@@ -58,13 +58,13 @@ soundManager.onready(function() {
 
   setInterval(function() {
     var tslength = tweetStream.length;
-    if (tslength > 70) {
+    if (tslength > 70 && TICK_LENGTHS.shortest != tickLength) {
       changeRate(TICK_LENGTHS.shortest);
       console.log("Shortening tick to 500");
-    } else if (tslength > 40 && tslength <= 70) {
+    } else if (tslength > 40 && tslength <= 70 && TICK_LENGTHS.shorter != tickLength) {
       changeRate(TICK_LENGTHS.shorter);
       console.log("Shortening tick to 1000");
-    } else if (tslength > 10 && tslength <= 40) {
+    } else if (tslength > 10 && tslength <= 40 && TICK_LENGTHS.slowest != tickLength) {
       changeRate(TICK_LENGTHS.slowest);
     } 
   }, RATE_CHANGE_INTERVAL);
