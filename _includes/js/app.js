@@ -81,10 +81,10 @@ function musicTick() {
 
     if(!muted) {
       var noteTextLength = moveTweet['text'].split(' ').length%16 + 1; 
-      var noteTime = moveTweet['created_at'].split(':')[1]%16 + 1;
+      var noteMinute = moveTweet['created_at'].split(':')[1]%16 + 1;
       soundManager.play('note' + noteTextLength);
-      soundManager.play('note' + noteTime);
-      console.log('text length: ' + noteTextLength + ', time ' + noteTime);
+      soundManager.play('note' + noteMinute);
+      console.log('text length: ' + noteTextLength + ', minute ' + noteMinute);
     }
   }
 
