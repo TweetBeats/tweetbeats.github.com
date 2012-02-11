@@ -15,5 +15,6 @@ title: TweetBeats
 
 
 <div id="tweet-holder">&nbsp;</div>
+<div id="tweet-receiver">&nbsp;</div>
 </div>
 <div id="tweet-sidebar" class="span4 offset3 noisy">&nbsp;</div>

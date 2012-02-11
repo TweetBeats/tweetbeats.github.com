@@ -1,8 +1,6 @@
 ---
 ---
 
-{% include js/mootools.js %}
+{% include js/soundmanager2.js %}
 {% include js/jquery.livetwitter.js %}
-{% include js/Audiolet.js %}
 {% include js/app.js %}
-{% include js/audiolet_app.js %}

@@ -52,7 +52,7 @@
         settings = $.extend({
           mode:      'search', // Mode, valid options are: 'search', 'user_timeline', 'list', 'home_timeline'
           rate:      15000,    // Refresh rate in ms
-          limit:     30,       // Limit number of results
+          limit:     100,       // Limit number of results
           imageSize: 24,       // Size of image in pixels
           refresh:   true,
           timeLinks: true,
@@ -274,7 +274,6 @@
 
           // Renders a tweet to HTML
           renderTweet: function (tweet) {
-
             var html = '<div class="tweet tweet-' + tweet.id + '">';
 
             if (this.settings.showAuthor) {
@@ -322,10 +321,11 @@
                     if (Date.parse(tweet.created_at) > twitter.lastTimeStamp) {
 
                       // Insert the HTML
-                      twitter.tweetList.push(twitter.renderTweet(tweet));
                       var newTweetNode = twitter.renderTweet(tweet);
                       $(twitter.container).prepend(newTweetNode);
                       twitter.tweetList.push(newTweetNode);
+                      tweet.node = newTweetNode;
+                      tweetStream.push(tweet);
 
 
                       // Make a note of the timestamp on the first span
@@ -373,10 +373,6 @@
               }, twitter.settings.rate);
               this.refresh(true);
             }
-            this.addInterval = setInterval(function() {
-              var offset = -1;
-              $('#tweet-sidebar').prepend(($('#tweet-holder > div.tweet').slice(offset)).hide().fadeIn());
-            }, 3000);
           },
 
           // Stop refreshing

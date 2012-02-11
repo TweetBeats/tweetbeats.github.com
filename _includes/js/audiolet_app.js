@@ -313,6 +313,6 @@ window.addEvent("domready", function() {
     });
     
     // Run the demo
-    window.demo = new Demo();
+    //window.demo = new Demo();
 });
 
