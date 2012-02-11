@@ -88,6 +88,7 @@
           container:     this,
           lastTimeStamp: 0,
           callback:      callback,
+          tweetList:     [],
 
           // Convert the time stamp to a more human readable format
           relativeTime: function (timeString) {
@@ -273,6 +274,7 @@
 
           // Renders a tweet to HTML
           renderTweet: function (tweet) {
+
             var html = '<div class="tweet tweet-' + tweet.id + '">';
 
             if (this.settings.showAuthor) {
@@ -295,7 +297,9 @@
 
             html += '</p></div>';
 
-            return html;
+            var tweetNode = $(html);
+
+            return tweetNode;
           },
 
           // Handle reloading
@@ -318,7 +322,11 @@
                     if (Date.parse(tweet.created_at) > twitter.lastTimeStamp) {
 
                       // Insert the HTML
-                      $(twitter.container).prepend(twitter.renderTweet(tweet));
+                      twitter.tweetList.push(twitter.renderTweet(tweet));
+                      var newTweetNode = twitter.renderTweet(tweet);
+                      $(twitter.container).prepend(newTweetNode);
+                      twitter.tweetList.push(newTweetNode);
+
 
                       // Make a note of the timestamp on the first span
                       // so we can update it later.
@@ -365,6 +373,10 @@
               }, twitter.settings.rate);
               this.refresh(true);
             }
+            this.addInterval = setInterval(function() {
+              $('#tweet-sidebar').prepend(($('#tweet-holder').find('div.tweet:last')).hide().slideDown());
+
+            }, 3000);
           },
 
           // Stop refreshing
@@ -393,6 +405,9 @@
           twitter.updateTimestamps();
           twitter.updateCount();
         }, 1000);
+
+        // Periodically fill the sidebar with tweets
+
 
         this.twitter.start();
       }
