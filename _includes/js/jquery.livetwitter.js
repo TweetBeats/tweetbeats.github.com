@@ -52,7 +52,7 @@
         settings = $.extend({
           mode:      'search', // Mode, valid options are: 'search', 'user_timeline', 'list', 'home_timeline'
           rate:      15000,    // Refresh rate in ms
-          limit:     10,       // Limit number of results
+          limit:     30,       // Limit number of results
           imageSize: 24,       // Size of image in pixels
           refresh:   true,
           timeLinks: true,
@@ -396,6 +396,12 @@
           updateCount: function() {
             var count = $(this.container).find('div.tweet').length;
             $('#tweet-count').html(count);
+              if(count > 30) {
+                console.log("Filled buffer.");
+                $('#buffer-progress').css('width', "100%");
+              } else {
+                $('#buffer-progress').css('width', ((count/30)*100) + '%');
+              }
             return count;
           }
         };
