@@ -115,6 +115,7 @@ function playMetronomeBeat() {
         arr.push($(this).attr('note'));
       });
 
+      $('#metro-' + metronomePos).effect("highlight", {}, 500);
       metronomePos++;
       if (METRONOME_COUNT < metronomePos) {
         metronomePos = 1;
@@ -148,7 +149,7 @@ function setUpControls() {
     $('#tweet-holder').liveTwitter(searchTerm).each(function(){
       this.twitter.clear();
     });
-    $('#search-term').text(searchTerm).hide().fadeIn();
+    $('#search-term').text(searchTerm).effect("highlight", {}, 500);
   });
 }
 
