@@ -9,13 +9,22 @@ var moveTweet;
 var musicMeasure = new Array();
 var refreshId;
 var TICK_LENGTHS = {
-  shortest: 500,
-  shorter: 1000,
-  normal: 2000,
-  slow: 2500,
-  slowest: 5000
+  shortest: 100,
+  shorter: 250,
+  normal: 500,
+  slow: 1000,
+  slowest: 2500
 }
-var RATE_CHANGE_INTERVAL = 5000;
+
+var numTicks = 0;
+var METRONOME_TICK_LENGTHS = {
+  fast: 5,
+  normal: 10,
+  slow: 20
+}
+var metronomeTick = METRONOME_TICK_LENGTHS.normal; // Notes every x seconds / 10. 50 is 5 seconds, 5 is .5
+
+var chordTick = 30;
 
 var tickLength = TICK_LENGTHS.normal;
 
@@ -53,24 +62,63 @@ soundManager.onready(function() {
     }).load();
   }
 
-  $("#tweet-holder").liveTwitter(searchTerm);
+  //$("#tweet-holder").liveTwitter(searchTerm);
   var musicTicker = musicTick();
-
-  setInterval(function() {
-    var tslength = tweetStream.length;
-    if (tslength > 70 && TICK_LENGTHS.shortest != tickLength) {
-      changeRate(TICK_LENGTHS.shortest);
-      console.log("Shortening tick to 500");
-    } else if (tslength > 40 && tslength <= 70 && TICK_LENGTHS.shorter != tickLength) {
-      changeRate(TICK_LENGTHS.shorter);
-      console.log("Shortening tick to 1000");
-    } else if (tslength > 10 && tslength <= 40 && TICK_LENGTHS.slowest != tickLength) {
-      changeRate(TICK_LENGTHS.slowest);
-    } 
-  }, RATE_CHANGE_INTERVAL);
 });
 
 function musicTick() {
+  return setInterval(function(){
+
+    var notesToPlay = new Array();
+    numTicks++;
+
+
+    var notesToPlay = playChords();
+    notesToPlay = notesToPlay.concat(playMetronomeBeat());
+
+    if (notesToPlay.length > 0) {
+      $.each(notesToPlay, function(){
+        soundManager.play(this);        
+      });
+    }
+
+    checkMetronomeRate();
+  }, 100)
+}
+
+function playChords() {
+  var arr = new Array();
+  return arr;
+};
+
+function playMetronomeBeat() {
+  var arr = new Array();
+    if(numTicks%metronomeTick == 0) {
+      console.log(numTicks);
+      if((numTicks/metronomeTick)%2 == 0) {
+        arr.push('note5');
+      }else {
+        arr.push('note1'); 
+      }    
+    }
+
+  return arr;  
+}
+
+function checkMetronomeRate(){
+  var tslength = tweetStream.length;
+  if (tslength > 70 && metronomeTick != tickLength && metronomeTick != METRONOME_TICK_LENGTHS.fast) {
+    console.log("Shortening tick to 5");
+    metronomeTick = METRONOME_TICK_LENGTHS.fast;
+  } else if (tslength > 40 && tslength <= 70 && metronomeTick != METRONOME_TICK_LENGTHS.normal) {
+    console.log("Shortening tick to 10");
+    metronomeTick = METRONOME_TICK_LENGTHS.normal;
+  } else if (tslength > 10 && tslength <= 40 && metronomeTick != METRONOME_TICK_LENGTHS.slow) {
+    metronomeTick = METRONOME_TICK_LENGTHS.slow;
+  }
+}
+
+function musicTickOld() {
   // Stop everything!
   soundManager.stopAll();
   if(tweetStream.length > 0) {
@@ -80,11 +128,18 @@ function musicTick() {
     console.log(moveTweet);
 
     if(!muted) {
+      // First, set a beat
+
+      /*
       var noteTextLength = moveTweet['text'].split(' ').length%16 + 1; 
       var noteMinute = moveTweet['created_at'].split(':')[1]%16 + 1;
+      var noteHashTag = moveTweet['text'].split('#').length;
       soundManager.play('note' + noteTextLength);
       soundManager.play('note' + noteMinute);
-      console.log('text length: ' + noteTextLength + ', minute ' + noteMinute);
+      soundManager.play('note' + noteHashTag);
+
+      console.log('text length: ' + noteTextLength + ', minute ' + noteMinute + ', hash ' + noteHashTag);
+      */
     }
   }
 
@@ -94,8 +149,8 @@ function musicTick() {
   }, tickLength);
 }
 
-function changeRate(rate) {
-  rate = rate || 1000;
+function changeRateOld(rate) {
+  rate = rate ||TICK_LENGTHS.normal;
   clearTimeout(refreshId);
   tickLength = rate;
   musicTick();
