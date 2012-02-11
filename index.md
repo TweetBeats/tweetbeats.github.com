@@ -6,7 +6,7 @@ title: TweetBeats
 <div class="container">
   
 <div class="row">
- <h1>TweetBeats <small>Twitter's pulse on <span id="search-term">Jeremy Lin</span></small> </h1>
+ <h1>TweetBeats <small>Twitter's pulse on <span id="search-term">CMU</span></small> </h1>
   <div id="buffer-container" class="span6 progress progress-striped active noisy">
     <div id="buffer-progress" class="bar">&nbsp;</div>
   </div>  
@@ -24,7 +24,7 @@ title: TweetBeats
     <h3>Hash Tag <small>Make 'popular' music</small> </h3>
     <p>Listen to Twitter's pulse on:</p>
     <div class="span3" style="margin-left: 0">
-    <form><input id="changeInput" type="text" placeholder="Input a hashtag"/> <a id="changeSearch" href="#" class="btn btn-success">Go</a> </form>
+    <form><input id="changeInput" type="text" placeholder="Input a hashtag" value="CMU"/> <a id="changeSearch" href="#" class="btn btn-success">Go</a> </form>
     </div>
     <p id="debug">&nbsp;</p>
   </div>

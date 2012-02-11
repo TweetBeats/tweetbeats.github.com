@@ -1,4 +1,4 @@
-var searchTerm = 'Jeremy Lin';
+var searchTerm = 'CMU';
 var muted = false;
 
 // TODO: Move this into the liveTwitter plugin object.
