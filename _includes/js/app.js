@@ -3,6 +3,8 @@ var searchTerm = 'Jeremy Lin';
 // TODO: Move this into the liveTwitter plugin object.
 var tweetStream = [];
 
+var musicMeasure = [];
+
 //$("#tweet-holder").liveTwitter(searchTerm);
 /*
 setInterval(function() {
@@ -38,14 +40,16 @@ soundManager.onready(function() {
     }).load();
   }
 
-  soundManager.play('note1');
-  soundManager.play('note3');
-  soundManager.play('note7');
-  soundManager.play('note8');
-  soundManager.play('note9');
-  soundManager.play('note10');
-  soundManager.play('note15');
+  var musicTicker = musicTick();
 });
+
+function musicTick() {
+  return window.setInterval(function() {
+    soundManager.play('note' + Math.floor(Math.random()*15));
+    soundManager.play('note' + Math.floor(Math.random()*15));
+    soundManager.play('note' + Math.floor(Math.random()*15));
+  }, 1000);
+}
 
 /*
 $('#tweet-receiver').live('newtweet', function(e, data) {
