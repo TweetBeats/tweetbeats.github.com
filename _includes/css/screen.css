@@ -20,6 +20,11 @@ body {
   background: #333;
 }
 
+#tweet-controls a {
+  display: block;
+  margin-bottom: 3px;
+}
+
 .tweet {
   background: #CCC;
   margin: 5px;

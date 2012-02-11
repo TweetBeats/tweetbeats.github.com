@@ -24,6 +24,9 @@ var METRONOME_TICK_LENGTHS = {
 }
 var metronomeTick = METRONOME_TICK_LENGTHS.normal; // Notes every x seconds / 10. 50 is 5 seconds, 5 is .5
 
+var METRONOME_COUNT = 4;
+var metronomePos = 1;
+
 var chordTick = 30;
 
 var tickLength = TICK_LENGTHS.normal;
@@ -62,6 +65,8 @@ soundManager.onready(function() {
     }).load();
   }
 
+  setUpControls();
+
   //$("#tweet-holder").liveTwitter(searchTerm);
   var musicTicker = musicTick();
 });
@@ -94,12 +99,16 @@ function playChords() {
 function playMetronomeBeat() {
   var arr = new Array();
     if(numTicks%metronomeTick == 0) {
-      console.log(numTicks);
-      if((numTicks/metronomeTick)%2 == 0) {
-        arr.push('note5');
-      }else {
-        arr.push('note1'); 
-      }    
+
+      var selectorString = "#metro-" + metronomePos + " .btn-info";
+     $(selectorString).each(function (i) {
+        arr.push($(this).attr('note'));
+      });
+
+      metronomePos++;
+      if (METRONOME_COUNT < metronomePos) {
+        metronomePos = 1;
+      }
     }
 
   return arr;  
@@ -116,6 +125,12 @@ function checkMetronomeRate(){
   } else if (tslength > 10 && tslength <= 40 && metronomeTick != METRONOME_TICK_LENGTHS.slow) {
     metronomeTick = METRONOME_TICK_LENGTHS.slow;
   }
+}
+
+function setUpControls() {
+  $('#metro-controls a').click(function(){
+    $(this).toggleClass('btn-info');
+  });
 }
 
 function musicTickOld() {
