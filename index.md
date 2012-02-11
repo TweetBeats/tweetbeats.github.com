@@ -6,5 +6,7 @@ title: TweetBeats
 <header>
   <h1>TweetBeats</h1>
 
-  <div id="tweets"></div>
 </header>
+<div id="tweet-count">0</div>
+
+<div id="tweets">&nbsp;</div>
