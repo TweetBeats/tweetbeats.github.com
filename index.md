@@ -6,7 +6,7 @@ title: TweetBeats
 <div class="container">
   
 <div class="row">
- <h1>TweetBeats</h1>
+ <h1>TweetBeats <small>Twitter's pulse on <span id="search-term">Jeremy Lin</span></small> </h1>
   <div id="buffer-container" class="span6 progress progress-striped active noisy">
     <div id="buffer-progress" class="bar">&nbsp;</div>
   </div>  

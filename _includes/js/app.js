@@ -147,6 +147,7 @@ function setUpControls() {
     $('#tweet-holder').liveTwitter(searchTerm).each(function(){
       this.twitter.clear();
     });
+    $('#search-term').text(searchTerm).hide().fadeIn();
   });
 }
 
