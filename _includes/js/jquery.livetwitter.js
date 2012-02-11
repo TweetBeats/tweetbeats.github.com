@@ -53,7 +53,7 @@
         settings = $.extend({
           mode:      'search', // Mode, valid options are: 'search', 'user_timeline', 'list', 'home_timeline'
           rate:      15000,    // Refresh rate in ms
-          limit:     100,       // Limit number of results
+          limit:     1000,       // Limit number of results
           imageSize: 24,       // Size of image in pixels
           refresh:   true,
           timeLinks: true,
@@ -407,7 +407,6 @@
 
         // Update the timestamps in realtime
         this.timeInterval = setInterval(function () {
-          twitter.updateTimestamps();
           twitter.updateCount();
         }, 1000);
 

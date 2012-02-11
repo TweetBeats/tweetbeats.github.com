@@ -126,13 +126,13 @@ function playMetronomeBeat() {
 
 function checkMetronomeRate(){
   var tslength = tweetStream.length;
-  if (tslength > 70 && metronomeTick != tickLength && metronomeTick != METRONOME_TICK_LENGTHS.fast) {
+  if (tslength > 50 && metronomeTick != tickLength && metronomeTick != METRONOME_TICK_LENGTHS.fast) {
     console.log("Shortening tick to 5");
     metronomeTick = METRONOME_TICK_LENGTHS.fast;
-  } else if (tslength > 40 && tslength <= 70 && metronomeTick != METRONOME_TICK_LENGTHS.normal) {
+  } else if (tslength > 25 && tslength <= 50 && metronomeTick != METRONOME_TICK_LENGTHS.normal) {
     console.log("Shortening tick to 10");
     metronomeTick = METRONOME_TICK_LENGTHS.normal;
-  } else if (tslength > 10 && tslength <= 40 && metronomeTick != METRONOME_TICK_LENGTHS.slow) {
+  } else if (tslength > 10 && tslength <= 25 && metronomeTick != METRONOME_TICK_LENGTHS.slow) {
     metronomeTick = METRONOME_TICK_LENGTHS.slow;
   }
 }
