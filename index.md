@@ -9,7 +9,8 @@ title: TweetBeats
  <h1>TweetBeats <small>Twitter's pulse on <span id="search-term">CMU</span></small> </h1>
   <div id="buffer-container" class="span6 progress progress-striped active noisy">
     <div id="buffer-progress" class="bar">&nbsp;</div>
-  </div>  
+  </div>
+  <p>This hack made by Brian Yee. Check out the source <a href="http://github.com/tweetbeats">on Github.</a></p>
 </div>
 
 

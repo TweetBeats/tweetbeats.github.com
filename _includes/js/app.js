@@ -84,7 +84,7 @@ function musicTick() {
     if (notesToPlay.length > 0) {
       soundManager.stopAll();
       $.each(notesToPlay, function(){
-        soundManager.play(this);        
+        soundManager.play(this);
       });
     }
 
